@@ -1,0 +1,9 @@
+{
+  "name": "vmeter",
+  "version": "1.0.0",
+  "dependencies": {
+    "etekcity-smartplug": "^1.0.2",
+    "server-side-event": "^1.1.2",
+    "express": "^4.16.4"
+  }
+}
