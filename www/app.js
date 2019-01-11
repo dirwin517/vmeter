@@ -99,5 +99,5 @@ evtSource.onmessage = function (e) {
         },
 
         yAxis: 0
-    }));
+    }, 500, 800));
 };

@@ -197,7 +197,7 @@ HCTHEME = {
     maskColor: 'rgba(255,255,255,0.3)'
 };
 
-HCCHART = (title, series) => {
+HCCHART = (title, series, max = 200, height = 400) => {
     return {
 
         chart: {
@@ -205,7 +205,7 @@ HCCHART = (title, series) => {
             plotBorderWidth: 1,
 
             plotBackgroundImage: null,
-            height: 400,
+            height: height,
 
         },
 
@@ -232,7 +232,7 @@ HCCHART = (title, series) => {
 
         yAxis: [{
             min: 0,
-            max: 200,
+            max: max,
             stops: [
                 [0.1, '#55BF3B'], // green
                 [0.5, '#DDDF0D'], // yellow
