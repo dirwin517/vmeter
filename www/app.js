@@ -4,21 +4,21 @@ let evtSource = new EventSource("energy");
 
 let plotBands = [{
     from: 0,
-    to: 6,
+    to: 100,
     color: '#FFCD00',
     innerRadius: '100%',
     outerRadius: '105%'
 },
     {
-        from: 6,
-        to: 60,
+        from: 100,
+        to: 140,
         color: '#00FF00',
         innerRadius: '100%',
         outerRadius: '105%'
     },
     {
-        from: 60,
-        to: 100,
+        from: 140,
+        to: 200,
         color: '#C02316',
         innerRadius: '100%',
         outerRadius: '105%'
@@ -98,22 +98,14 @@ evtSource.onmessage = function (e) {
 
         yAxis: [{
             min: 0,
-            max: 100,
+            max: 200,
             stops: [
                 [0.1, '#55BF3B'], // green
                 [0.5, '#DDDF0D'], // yellow
-                [0.9, '#DF5353'] // red
+                [0.70, '#DF5353'] // red
             ],
 
            plotBands: plotBands,
-            // title: {
-            //     text: 'Watts',
-            //     style : {
-            //         color: "#ffffff"
-            //     },
-            //     y: 40,
-            //
-            // }
         }],
 
 
