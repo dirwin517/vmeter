@@ -86,7 +86,7 @@ evtSource.onmessage = function (e) {
     }));
 
 
-    Highcharts.chart(apartmentTotal, HCCHART(meterData.name, {
+    Highcharts.chart(apartmentTotal, HCCHART('Apartment (total)', {
         name: 'Apartment (total)',
         data: [Object.keys(meterValues).reduce((acc, key) => acc+=meterValues[key], 0)],
         dataLabels: {
