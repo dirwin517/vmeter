@@ -39,6 +39,8 @@ Highcharts.setOptions(Highcharts.theme);
 
 let meterValues = {};
 
+let apartmentTotal = document.getElementById('apartment-total');
+
 evtSource.onmessage = function (e) {
 
     let meterData = JSON.parse(e.data);
@@ -84,7 +86,7 @@ evtSource.onmessage = function (e) {
     }));
 
 
-    Highcharts.chart(div, HCCHART(meterData.name, {
+    Highcharts.chart(apartmentTotal, HCCHART(meterData.name, {
         name: 'Apartment (total)',
         data: [Object.keys(meterValues).reduce((acc, key) => acc+=meterValues[key], 0)],
         dataLabels: {
