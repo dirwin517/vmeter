@@ -198,6 +198,29 @@ HCTHEME = {
 };
 
 HCCHART = (title, series, max = 200, height = 400) => {
+    let plotBands = [{
+        from: 0,
+        to: max * 0.5,
+        color: '#FFCD00',
+        innerRadius: '100%',
+        outerRadius: '105%'
+    },
+        {
+            from: max * 0.5,
+            to: max * 0.75,
+            color: '#00FF00',
+            innerRadius: '100%',
+            outerRadius: '105%'
+        },
+        {
+            from:  max * 0.75,
+            to: max,
+            color: '#C02316',
+            innerRadius: '100%',
+            outerRadius: '105%'
+        }];
+
+
     return {
 
         chart: {

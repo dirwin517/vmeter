@@ -2,28 +2,6 @@ let evtSource = new EventSource("energy");
 
 // some code stolen from https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/gauge-vu-meter/
 
-let plotBands = [{
-    from: 0,
-    to: 100,
-    color: '#FFCD00',
-    innerRadius: '100%',
-    outerRadius: '105%'
-},
-    {
-        from: 100,
-        to: 140,
-        color: '#00FF00',
-        innerRadius: '100%',
-        outerRadius: '105%'
-    },
-    {
-        from: 140,
-        to: 200,
-        color: '#C02316',
-        innerRadius: '100%',
-        outerRadius: '105%'
-    }];
-
 let container = document.getElementById('container');
 
 Highcharts.createElement('link', {
