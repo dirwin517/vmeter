@@ -196,3 +196,54 @@ HCTHEME = {
     contrastTextColor: '#F0F0F3',
     maskColor: 'rgba(255,255,255,0.3)'
 };
+
+HCCHART = (title, series) => {
+    return {
+
+        chart: {
+            type: 'solidgauge',
+            plotBorderWidth: 1,
+
+            plotBackgroundImage: null,
+            height: 400,
+
+        },
+
+        pane: {
+            center: ['50%', '85%'],
+            size: '140%',
+            startAngle: -90,
+            endAngle: 90,
+            background: {
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                innerRadius: '60%',
+                outerRadius: '100%',
+                shape: 'arc'
+            }
+        },
+
+        title: {
+            text: title,
+        },
+
+        tooltip: {
+            enabled: false
+        },
+
+        yAxis: [{
+            min: 0,
+            max: 200,
+            stops: [
+                [0.1, '#55BF3B'], // green
+                [0.5, '#DDDF0D'], // yellow
+                [0.70, '#DF5353'] // red
+            ],
+
+            plotBands: plotBands,
+        }],
+
+
+        series: [series]
+
+    };
+}
