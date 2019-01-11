@@ -26,6 +26,17 @@ let plotBands = [{
 
 let container = document.getElementById('container');
 
+Highcharts.createElement('link', {
+    href: 'https://fonts.googleapis.com/css?family=Unica+One',
+    rel: 'stylesheet',
+    type: 'text/css'
+}, null, document.getElementsByTagName('head')[0]);
+
+Highcharts.theme = HCTHEME;
+
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+
 evtSource.onmessage = function (e) {
 
     let meterData = JSON.parse(e.data);
@@ -35,39 +46,51 @@ evtSource.onmessage = function (e) {
     let div = document.getElementById(meterData.name);
     if (!div) {
         div = document.createElement('div');
-        div.classList.add('container');
+        div.classList.add('floating');
         div.id = meterData.name;
         container.append(div);
     }
 
+    function sortThem(s) {
+        return Array.prototype.slice.call(document.body.querySelectorAll(s)).sort(function sort (ea, eb) {
+            if (ea.id < eb.id) return -1;
+            if (ea.id > eb.id) return 1;
+            return 0;
+        }).map(function(div) {
+            div.parentElement.appendChild(div);
+            return div.id
+        });
+    }
+// call it like this
+    console.log('ids', sortThem('div.floating'))
+
     Highcharts.chart(div, {
 
         chart: {
-            type: 'gauge',
+            type: 'solidgauge',
             plotBorderWidth: 1,
-            plotBackgroundColor: {
-                linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
-                stops: [
-                    [0, '#FFF4C6'],
-                    [0.3, '#FFFFFF'],
-                    [1, '#FFF4C6']
-                ]
-            },
+
             plotBackgroundImage: null,
-            height: 200
+            height: 400,
+
+        },
+
+        pane: {
+            center: ['50%', '85%'],
+            size: '140%',
+            startAngle: -90,
+            endAngle: 90,
+            background: {
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                innerRadius: '60%',
+                outerRadius: '100%',
+                shape: 'arc'
+            }
         },
 
         title: {
-            text: meterData.name
+            text: meterData.name,
         },
-
-        pane: [{
-            startAngle: -45,
-            endAngle: 45,
-            background: null,
-            center: ['25%', '145%'],
-            size: 300
-        }],
 
         tooltip: {
             enabled: false
@@ -76,35 +99,36 @@ evtSource.onmessage = function (e) {
         yAxis: [{
             min: 0,
             max: 100,
-            minorTickPosition: 'outside',
-            tickPosition: 'outside',
-            labels: {
-                rotation: 'auto',
-                distance: 20
-            },
-            plotBands: plotBands,
-            pane: 0,
-            title: {
-                text: 'Watts',
-                y: -40
-            }
-        }],
+            stops: [
+                [0.1, '#55BF3B'], // green
+                [0.5, '#DDDF0D'], // yellow
+                [0.9, '#DF5353'] // red
+            ],
 
-        plotOptions: {
-            gauge: {
-                dataLabels: {
-                    enabled: false
-                },
-                dial: {
-                    radius: '100%'
-                }
-            }
-        },
+           plotBands: plotBands,
+            // title: {
+            //     text: 'Watts',
+            //     style : {
+            //         color: "#ffffff"
+            //     },
+            //     y: 40,
+            //
+            // }
+        }],
 
 
         series: [{
             name: meterData.name,
             data: [meterData.power],
+            dataLabels: {
+                format : '<span style=";color:#ffffff;font-size: 30px;">{y:.1f} Watts</span>',
+                borderWidth: 0,
+                style: {
+                    textOutline: 0,
+                    textShadow: false
+                },
+            },
+
             yAxis: 0
         }]
 

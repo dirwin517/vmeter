@@ -50,5 +50,9 @@ const config = require('./config.json');
         res.end(fs.readFileSync('./www/app.js', 'utf8'));
     });
 
+    app.get('/hctheme.js', (req, res) => {
+        res.end(fs.readFileSync('./www/hctheme.js', 'utf8'));
+    });
+
     app.listen(9001);
 })();
