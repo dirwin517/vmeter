@@ -36,7 +36,12 @@ const config = require('./config.json');
             })
         };
 
-        setInterval(updateMeters, 3 * 60 * 1000);//poll every 3 minutes thats about how often etek updates
+        let intv = setInterval(updateMeters, 3 * 60 * 1000);//poll every 3 minutes thats about how often etek updates
+
+        res.on('timeout', () => clearInterval(intv));
+        res.on('error', () => clearInterval(intv));
+        res.on('close', () => clearInterval(intv));
+        res.on('end', () => clearInterval(intv));
 
         updateMeters();
     });
